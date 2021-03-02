@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Create your pizza:</h3>
+<img th:src="@{/images/pizza_logo.jpg}" width="200" height="200"/>
+
+<form method="post" th:object="${create}">
+    <div class="grid">
+        <div class="ingredient-group" id="basics">
+            <h3>Choose the basic: </h3>
+            <div th:each="ingredient : ${basic}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
