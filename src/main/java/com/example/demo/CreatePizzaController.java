@@ -15,7 +15,11 @@ import java.util.List;
 public class CreatePizzaController {
     @GetMapping
     public String showDesignForm(Model model){
-        List<Ingredient> ingredients = Arrays.asList(new Ingredient("CLS22", "Classic base 22cm", Ingredient.Type.BASIC));
+        List<Ingredient> ingredients = Arrays.asList(
+                new Ingredient("CLS22", "Classic base 22cm", Ingredient.Type.BASIC),
+                new Ingredient("PEPE", "Pepperoni", Ingredient.Type.MEAT)
+                );
+
         return "design";
     }
 }
