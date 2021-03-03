@@ -1,0 +1,29 @@
+.ingredient-group{
+    padding: 10px;
+    display: inline-block;
+    float: left;
+    width: 35%;
+}
+.ingredient-group h3{
+    margin: 0;
+}
+.ingredient-group div{
+    display: flex;
+
+}
+.ingredient-group p{
+    display: inline;
+    margin:0;
+    white-space: normal;
+    overflow: hidden;
+}
+.grid{
+    display:flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 50%;
+}
+.checktext{
+    white-space: normal;
+    overflow: hidden;
+}
