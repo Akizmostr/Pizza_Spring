@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/styles/style.css}" />
 </head>
 <body>
 <h3>Create your pizza:</h3>
@@ -13,6 +14,13 @@
         <div class="ingredient-group" id="basics">
             <h3>Choose the basic: </h3>
             <div th:each="ingredient : ${basic}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+        </div>
+        <div class="ingredient-group" id="meat">
+            <h3>Choose meat: </h3>
+            <div th:each="ingredient : ${meat}">
                 <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
                 <span th:text="${ingredient.name}">INGREDIENT</span><br/>
             </div>
