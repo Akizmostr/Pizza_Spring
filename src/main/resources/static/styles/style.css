@@ -5,11 +5,10 @@
     width: 35%;
 }
 .ingredient-group h3{
-    margin: 0;
+    margin-bottom: 3px;
 }
 .ingredient-group div{
     display: flex;
-
 }
 .ingredient-group p{
     display: inline;
@@ -27,3 +26,11 @@
     white-space: normal;
     overflow: hidden;
 }
+
+.submit-button h3{
+    margin-bottom: 5px;
+}
+.submit-field{
+    margin-bottom: 5px;
+}
+

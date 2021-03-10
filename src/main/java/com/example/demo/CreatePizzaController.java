@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/create")
 public class CreatePizzaController {
     @GetMapping
-    public String showDesignForm(Model model){
+    public String showCreationForm(Model model){
         List<Ingredient> ingredients = Arrays.asList(
                 new Ingredient("CLS22", "Classic base 22cm", Ingredient.Type.BASIC),
                 new Ingredient("CLS30", "Classic base 30cm", Ingredient.Type.BASIC),
@@ -36,8 +37,13 @@ public class CreatePizzaController {
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
         }
         model.addAttribute("create", new Pizza());
-        //model.addAttribute("basic", new Pizza());
         return "create";
+    }
+
+    @PostMapping
+    public String processCreation(Pizza pizza){
+        log.info("Processing creation: " + pizza);
+        return "redirect:/orders/current";
     }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Ingredient.Type type) {
