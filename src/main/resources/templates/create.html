@@ -14,7 +14,7 @@
         <div class="ingredient-group" id="basics">
             <h3>Choose the basic: </h3>
             <div th:each="ingredient : ${basic}">
-                <input name="ingredients" type="radio" th:value="${ingredient.id}"/>
+                <input name="ingredients" type="radio" checked th:value="${ingredient.id}"/>
                 <span class="checktext" th:text="${ingredient.name}">INGREDIENT</span><br/>
             </div>
         </div>

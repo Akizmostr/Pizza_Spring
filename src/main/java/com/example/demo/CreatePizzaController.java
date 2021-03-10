@@ -3,10 +3,12 @@ package com.example.demo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +43,11 @@ public class CreatePizzaController {
     }
 
     @PostMapping
-    public String processCreation(Pizza pizza){
+    public String processCreation(@Valid Pizza pizza, Errors errors){
+        if(errors.hasErrors()){
+            return "create";
+        }
+        //Save creation...
         log.info("Processing creation: " + pizza);
         return "redirect:/orders/current";
     }
