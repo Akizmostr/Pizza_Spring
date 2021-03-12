@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Home page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/styles/style.css}" />
 </head>
 <body>
     <h1>Pizza!!!</h1>
-    <img th:src="@{/images/pizza_logo.jpg}" width="200" height="200"/>
+    <div class="home-container">
+        <img th:src="@{/images/pizza_logo.jpg}" width="200" height="200"/>
+        <a class="btn" th:href="@{/create}">Create</a>
+    </div>
+
+
 </body>
 </html>

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/styles/style.css}" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
 <h3>Create your pizza:</h3>
@@ -50,7 +51,7 @@
     </div>
     <div class="submit-button">
         <h3>Name your pizza:</h3>
-        <input class="submit-field" type="text" th:field="*{name}"/>
+        <input class="submit-field" type="text" th:field="*{name}" />
         <span class="validationError"
               th:if="${#fields.hasErrors('name')}"
               th:errors="*{name}">Error</span>
