@@ -23,6 +23,21 @@ import java.util.stream.Collectors;
 public class CreatePizzaController {
     @GetMapping
     public String showCreationForm(Model model){
+        addCreationFormModelAttributes(model, new Pizza());
+        return "create";
+    }
+
+    @PostMapping
+    public String processCreation(@Valid @ModelAttribute("create") Pizza pizza, BindingResult result, Model model){
+        if(result.hasErrors()){
+            addCreationFormModelAttributes(model, pizza);
+            return "create";
+        }
+        //Save creation...
+        log.info("Processing creation: " + pizza);
+        return "redirect:/orders/current";
+    }
+    private void addCreationFormModelAttributes(Model model, Pizza pizza) {
         List<Ingredient> ingredients = Arrays.asList(
                 new Ingredient("CLS22", "Classic base 22cm", Ingredient.Type.BASIC),
                 new Ingredient("CLS30", "Classic base 30cm", Ingredient.Type.BASIC),
@@ -34,24 +49,13 @@ public class CreatePizzaController {
                 new Ingredient("MOZ", "Mozzarella cheese", Ingredient.Type.CHEESE),
                 new Ingredient("BARBS", "Barbecue sauce", Ingredient.Type.SAUCE),
                 new Ingredient("TOMAS", "Tomato sauce", Ingredient.Type.SAUCE)
-                );
+        );
 
         Ingredient.Type[] types = Ingredient.Type.values();
         for(Ingredient.Type type: types){
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
         }
-        model.addAttribute("create", new Pizza());
-        return "create";
-    }
-
-    @PostMapping
-    public String processCreation(@Valid @ModelAttribute("create") Pizza pizza, BindingResult result){
-        if(result.hasErrors()){
-            return "create";
-        }
-        //Save creation...
-        log.info("Processing creation: " + pizza);
-        return "redirect:/orders/current";
+        model.addAttribute("create", pizza);
     }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Ingredient.Type type) {

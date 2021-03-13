@@ -59,7 +59,8 @@
     font-weight: bold;
     text-transform: uppercase;
     vertical-align: top;
+    transition: background .2s linear;
 }
 .btn:hover{
-    background-color: #d39938;
+    background-color: #ffb247;
 }
