@@ -1,14 +1,12 @@
 package com.example.demo;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -20,7 +18,18 @@ import java.util.stream.Collectors;
 @Slf4j
 @Controller
 @RequestMapping("/create")
+@SessionAttributes("order")
 public class CreatePizzaController {
+    private final IngredientRepository ingredientRepo;
+
+    private PizzaRepository createRepo;
+
+    @Autowired
+    public CreatePizzaController(IngredientRepository ingredientRepo, PizzaRepository createRepo) {
+        this.ingredientRepo = ingredientRepo;
+        this.createRepo = createRepo;
+    }
+
     @GetMapping
     public String showCreationForm(Model model){
         addCreationFormModelAttributes(model, new Pizza());
@@ -28,12 +37,14 @@ public class CreatePizzaController {
     }
 
     @PostMapping
-    public String processCreation(@Valid @ModelAttribute("create") Pizza pizza, BindingResult result, Model model){
+    public String processCreation(@Valid @ModelAttribute("create") Pizza pizza, @Valid @ModelAttribute("order") Order order, BindingResult result, Model model){
         if(result.hasErrors()){
             addCreationFormModelAttributes(model, pizza);
             return "create";
         }
         //Save creation...
+        Pizza saved = createRepo.save(pizza);
+        order.addCreation(saved);
         log.info("Processing creation: " + pizza);
         return "redirect:/orders/current";
     }
